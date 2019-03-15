@@ -28,13 +28,15 @@
           if (status === 'complete') {
             let lss = result.addressComponent
             console.log(result)
-            let str = lss.province + lss.city + lss.district;
+            let str = lss.province +'<br/>'+ lss.city +'<br/>'+ lss.district;
             document.getElementById('detail').innerHTML = JSON.stringify(lss);
             document.getElementById('appDetail').innerHTML = result.formattedAddress;
             document.getElementById('app').innerHTML = str
           } else {
             let str1 = result.message
             document.getElementById('app').innerHTML = str1
+            document.getElementById('appDetail').innerHTML = '获取信息失败'
+            document.getElementById('detail').innerHTML = JSON.stringify(result);
           }
         })
     })
