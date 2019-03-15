@@ -10,6 +10,7 @@
   </head>
   <body>
     <div id="app" style="color:red;text-align:center;margin:100px;"></div>
+    <div id="appDetail" style="color:red;text-align:center;margin:100px;"></div>
     <div id="detail"></div>
     <!-- built files will be auto injected -->
   </body>
@@ -29,6 +30,7 @@
             console.log(result)
             let str = lss.province + lss.city + lss.district;
             document.getElementById('detail').innerHTML = JSON.stringify(lss);
+            document.getElementById('appDetail').innerHTML = result.formattedAddress;
             document.getElementById('app').innerHTML = str
           } else {
             let str1 = result.message
