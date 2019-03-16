@@ -11,6 +11,7 @@
   <body>
     <div id="app" style="color:red;text-align:center;margin:100px;"></div>
     <div id="appDetail" style="color:red;text-align:center;margin:100px;"></div>
+    <div id="city" style="color:red;text-align:center;margin:100px;"></div>
     <div id="detail"></div>
     <!-- built files will be auto injected -->
   </body>
@@ -38,6 +39,12 @@
             document.getElementById('appDetail').innerHTML = '获取信息失败'
             document.getElementById('detail').innerHTML = JSON.stringify(result);
           }
+        })
+
+        geolocation.getCityInfo(function (status, res) {
+          console.log(status, res)
+          document.getElementById('city').innerHTML = JSON.stringify(res);
+
         })
     })
   </script>
