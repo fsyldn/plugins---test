@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>地图定位测试</title>
+    <!-- <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ehyxrrloDFk8xXgvlFrVbxTvlbCZaZ4p"></script> -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.13&key=3933b4db7bcfd2d41126d31f4ae430dd"></script>
+
+  </head>
+  <body>
+    <div id="app" style="color:red;text-align:center;margin:100px;"></div>
+    <div id="appDetail" style="color:red;text-align:center;margin:100px;"></div>
+    <div id="city" style="color:red;text-align:center;margin:100px;"></div>
+    <div id="detail"></div>
+    <!-- built files will be auto injected -->
+  </body>
+  <script>
+  AMap.plugin('AMap.Geolocation', function () {
+        var geolocation = new AMap.Geolocation({
+          enableHighAccuracy: true, // 是否使用高精度定位，默认:true
+          timeout: 20000, // 超过10秒后停止定位，默认：5s
+          buttonPosition: 'RB', // 定位按钮的停靠位置
+          buttonOffset: new AMap.Pixel(10, 20), // 定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+          zoomToAccuracy: true // 定位成功后是否自动调整地图视野到定位点
+        })
+
+        geolocation.getCurrentPosition(function (status, result) {
+          if (status === 'complete') {
+            let lss = result.addressComponent
+            console.log(result)
+            let str = lss.province +'<br/>'+ lss.city +'<br/>'+ lss.district;
+            document.getElementById('detail').innerHTML = JSON.stringify(lss);
+            document.getElementById('appDetail').innerHTML = result.formattedAddress;
+            document.getElementById('app').innerHTML = str
+          } else {
+            let str1 = result.message
+            document.getElementById('app').innerHTML = str1
+            document.getElementById('appDetail').innerHTML = '获取信息失败'
+            document.getElementById('detail').innerHTML = JSON.stringify(result);
+          }
+        })
+
+        geolocation.getCityInfo(function (status, res) {
+          console.log(status, res)
+          document.getElementById('city').innerHTML = JSON.stringify(res);
+
+        })
+    })
+  </script>
+</html>
